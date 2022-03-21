@@ -11,7 +11,7 @@ public class Rfc865UdpServer {
     static DatagramSocket socket;
 
     public static void main(String[] args) {
-        byte buf[] = new byte[2];
+        byte buf[] = new byte[100];
         try {
             InetAddress address = InetAddress.getByName("localhost");
             int port = 3000;

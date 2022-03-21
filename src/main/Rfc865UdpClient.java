@@ -1,3 +1,8 @@
+/**
+ * Name: Isaiah Wong Hao Jie
+ * Group: SSP4
+ * IP Address: 172.21.151.249
+ */
 package main;
 
 import java.io.IOException;
@@ -5,21 +10,22 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
-import java.nio.Buffer;
 import java.nio.charset.StandardCharsets;
 
 public class Rfc865UdpClient {
     static DatagramSocket socket;
-    final static  String ECHO = "Isaiah Wong Hao Jie, SSP4, 172.21.151.249";
+    final static String ECHO = "Isaiah Wong Hao Jie, SSP4, 172.21.151.249";
     final static String ADDR = "swlab2-c.scse.ntu.edu.sg";
+    final static String LOCAL = "localhost";
     final static int PORT = 17;
+    final static int LOCAL_PORT = 3000;
 
     public static void main(String[] argv) {
 
-        byte []buf = new byte[Rfc865UdpClient.ECHO.length()];
+        byte[] buf = new byte[Rfc865UdpClient.ECHO.length()];
 
         try {
-            InetAddress address = InetAddress.getByName(Rfc865UdpClient.ADDR);
+            InetAddress address = InetAddress.getByName(Rfc865UdpClient.LOCAL);
             socket = new DatagramSocket();
 
             // Send UDP request to server
@@ -27,14 +33,19 @@ public class Rfc865UdpClient {
                     Rfc865UdpClient.ECHO.getBytes(StandardCharsets.UTF_8),
                     Rfc865UdpClient.ECHO.length(),
                     address,
-                    Rfc865UdpClient.PORT
+                    Rfc865UdpClient.LOCAL_PORT
             );
             socket.send(request);
 
             // Receive reply
             DatagramPacket reply = new DatagramPacket(buf, buf.length);
             socket.receive(reply);
-            System.out.println(new String(reply.getData(), StandardCharsets.UTF_8));
+            System.out.println(
+                    new String(
+                            reply.getData(),
+                            StandardCharsets.UTF_8
+                    )
+            );
 
         } catch (SocketException e) {
             e.printStackTrace();
