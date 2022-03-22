@@ -25,7 +25,7 @@ public class Rfc865UdpClient {
         byte[] buf = new byte[Rfc865UdpClient.ECHO.length()];
 
         try {
-            InetAddress address = InetAddress.getByName(Rfc865UdpClient.LOCAL);
+            InetAddress address = InetAddress.getByName(Rfc865UdpClient.ADDR);
             socket = new DatagramSocket();
 
             // Send UDP request to server
@@ -33,7 +33,7 @@ public class Rfc865UdpClient {
                     Rfc865UdpClient.ECHO.getBytes(StandardCharsets.UTF_8),
                     Rfc865UdpClient.ECHO.length(),
                     address,
-                    Rfc865UdpClient.LOCAL_PORT
+                    Rfc865UdpClient.PORT
             );
             socket.send(request);
 
